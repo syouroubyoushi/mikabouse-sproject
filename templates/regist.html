@@ -13,16 +13,27 @@
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3">会員登録ページ</h4>
-            <form action="./a.php" method="post" name="regiform" id="regist-Form" class="validation-form" novalidate onsubmit="return sendit()">
+            <form action="{% url 'regist' %}" method="post" name="regiform" id="regist-Form" class="validation-form" novalidate onsubmit="return sendit()">
+              {% csrf_token %}
               <div class="row">
-              <div class="mb-3">
+              <div class="col-md-10 mb-3">
             <label  for="_d">ID</label>
-                <input name="_id" type="text"  class="form-control fadeInfirst" id="_id" placeholder="ID" required>
+                <input name="username" type="text"  class="form-control" id="username" placeholder="ID" required>
                 <p id="idcheck"></p>
               </div>
+
+              {% comment %} 
+              IDCHECK機能
+              <div class="col-md-2 mb-3">
+                <label for="_d">ID CHECK</label>
+                <div>
+                  <input class="btn btn-primary btn-block" type="button" id="checkIdBtn" value="check">
+                </div></div>
+                <p id="result">&nbsp;</p> {% endcomment %}
+
               <div class="mb-3">
                 <label for="pw">パスワード</label>
-                <input name="_pw" type="password" class="form-control" id="_pw" placeholder="password" required>
+                <input name="password1" type="password" class="form-control" id="password1" placeholder="password" required>
                 <div class="invalid-feedback">
                 パスワードを入力してください。
                 </div>
@@ -30,32 +41,16 @@
     
               <div class="mb-3">
                 <label for="pw">パスワード再確認</label>
-                <input name="_pwre" type="password" class="form-control" id="_pwre" placeholder="password" required>
+                <input name="password2" type="password" class="form-control" id="password2" placeholder="password" required>
                 <div class="invalid-feedback">
                 パスワード再確認を入力してください。
                 </div>
               </div>
-    
-                <div class="col-md-6 mb-3">
-                  <label for="sei">氏</label>
-                  <input name="_sei" type="text" class="form-control" id="_sei" placeholder="" value="" required>
-                  <div class="invalid-feedback">
-                    氏を入力してください。
-                  </div>
-                </div>
-    
-                <div class="col-md-6 mb-3">
-                  <label for="mei">名</label>
-                  <input name="_mei" type="text" class="form-control" id="_mei" placeholder="" value="" required>
-                  <div class="invalid-feedback">
-                    名を入力してください。
-                  </div>
-                </div>
               </div>
     
               <div class="mb-3">
                 <label for="email">メールアドレス</label>
-                <input name="_email" type="email" class="form-control" id="email" placeholder="youremail@example.com" required>
+                <input name="email" type="email" class="form-control" id="email" placeholder="email@example.com" required>
                 <div class="invalid-feedback">
                   メールアドレスを入力してください。
                 </div>
