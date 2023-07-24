@@ -1,12 +1,72 @@
 {% load static %}
 <head>
-    <title>Document</title>
+    <title>Regist Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/regist.css' %}">
     <link rel="stylesheet" href="{% static 'css/lib/bootstrap.min.css' %}">
-    <script src="{% static 'js/lib/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/lib/jquery.js' %}"></script>
 </head>
-<header>Top</header>
-<body class="lan">
-    regist
+<body>
+    <div class="container">
+        <div class="input-form-backgroud row">
+          <div class="input-form col-md-12 mx-auto">
+            <h4 class="mb-3">会員登録ページ</h4>
+            <form action="./a.php" method="post" name="regiform" id="regist-Form" class="validation-form" novalidate onsubmit="return sendit()">
+              <div class="row">
+              <div class="mb-3">
+            <label  for="_d">ID</label>
+                <input name="_id" type="text"  class="form-control fadeInfirst" id="_id" placeholder="ID" required>
+                <p id="idcheck"></p>
+              </div>
+              <div class="mb-3">
+                <label for="pw">パスワード</label>
+                <input name="_pw" type="password" class="form-control" id="_pw" placeholder="password" required>
+                <div class="invalid-feedback">
+                パスワードを入力してください。
+                </div>
+              </div>
+    
+              <div class="mb-3">
+                <label for="pw">パスワード再確認</label>
+                <input name="_pwre" type="password" class="form-control" id="_pwre" placeholder="password" required>
+                <div class="invalid-feedback">
+                パスワード再確認を入力してください。
+                </div>
+              </div>
+    
+                <div class="col-md-6 mb-3">
+                  <label for="sei">氏</label>
+                  <input name="_sei" type="text" class="form-control" id="_sei" placeholder="" value="" required>
+                  <div class="invalid-feedback">
+                    氏を入力してください。
+                  </div>
+                </div>
+    
+                <div class="col-md-6 mb-3">
+                  <label for="mei">名</label>
+                  <input name="_mei" type="text" class="form-control" id="_mei" placeholder="" value="" required>
+                  <div class="invalid-feedback">
+                    名を入力してください。
+                  </div>
+                </div>
+              </div>
+    
+              <div class="mb-3">
+                <label for="email">メールアドレス</label>
+                <input name="_email" type="email" class="form-control" id="email" placeholder="youremail@example.com" required>
+                <div class="invalid-feedback">
+                  メールアドレスを入力してください。
+                </div>
+              </div>
+              <div class="mb-4"></div>
+              <input class="btn btn-primary btn-lg btn-block" type="submit" id="signup-Button" value="作成">
+              <input class="btn btn-secondary btn-lg btn-block" type="button" onclick="location.href='../'" value="戻る">
+            </form>
+          </div>
+        </div>
+      </div>
 </body>
+<script src="{% static 'js/regist.js' %}"></script>
 </html>
