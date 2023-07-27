@@ -38,7 +38,7 @@ def regist(request):
 def checkname(request):
     try:
         user = User.objects.get(username=request.GET['username'])
-    except Exception as e:
+    except Exception:
         user = None
     result = {
         'result':'success',
