@@ -1,6 +1,6 @@
 {% load static %}
 <head>
-    <title>Regist Page</title>
+    <title>会員登録ページ</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/regist.css' %}">
@@ -19,17 +19,15 @@
               <div class="col-md-10 mb-3">
             <label  for="_d">ID</label>
                 <input name="username" type="text"  class="form-control" id="username" placeholder="ID" required>
-                <p id="idcheck"></p>
+                <p id="idcheck1"></p>
               </div>
 
-              {% comment %} 
-              IDCHECK機能
               <div class="col-md-2 mb-3">
                 <label for="_d">ID CHECK</label>
                 <div>
-                  <input class="btn btn-primary btn-block" type="button" id="checkIdBtn" value="check">
+                  <input name="idcheck" class="btn btn-primary btn-block" type="button" id="idcheck" value="check">
                 </div></div>
-                <p id="result">&nbsp;</p> {% endcomment %}
+                <p id="result">&nbsp;</p>
 
               <div class="mb-3">
                 <label for="pw">パスワード</label>
@@ -38,7 +36,7 @@
                 パスワードを入力してください。
                 </div>
               </div>
-    
+
               <div class="mb-3">
                 <label for="pw">パスワード再確認</label>
                 <input name="password2" type="password" class="form-control" id="password2" placeholder="password" required>
@@ -47,7 +45,7 @@
                 </div>
               </div>
               </div>
-    
+
               <div class="mb-3">
                 <label for="email">メールアドレス</label>
                 <input name="email" type="email" class="form-control" id="email" placeholder="email@example.com" required>
@@ -56,7 +54,7 @@
                 </div>
               </div>
               <div class="mb-4"></div>
-              <input class="btn btn-primary btn-lg btn-block" type="submit" id="signup-Button" value="作成">
+              <input class="btn btn-primary btn-lg btn-block" type="submit" id="regist-submit" name_check_result="fail" value="作成">
               <input class="btn btn-secondary btn-lg btn-block" type="button" onclick="location.href='../'" value="戻る">
             </form>
           </div>
