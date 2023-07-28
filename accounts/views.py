@@ -24,6 +24,7 @@ def regist(request):
         user.save()
         return HttpResponseRedirect('regista')
     
+#会員登録の時IDが重複かをLIVEで確認
 def check_username(request):
     if request.method == 'GET':
         username = request.GET.get('username', '').strip()
