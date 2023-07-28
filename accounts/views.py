@@ -16,35 +16,24 @@ def regist(request):
         username = request.POST.get('username', None)
         email = request.POST.get('email', None) 
         password1 = request.POST.get('password1', None)
-        password2 = request.POST.get('password2', None)
-        
-        err_data={}
-        if not(username and email and password1 and password2):
-            err_data['error'] = ''
-        
-        elif password1 != password2:
-            err_data['error'] = ''
-        
-        else:
-            user = User(
-                username=username,
-                email=email,
-                password=make_password(password1),
-            )
-            user.save()
-
-    return HttpResponseRedirect('regista')
+        user = User(
+            username=username,
+            email=email,
+            password=make_password(password1),
+        )
+        user.save()
+        return HttpResponseRedirect('regista')
     
-def checkname(request):
-    try:
-        user = User.objects.get(username=request.GET['username'])
-    except Exception:
-        user = None
-    result = {
-        'result':'success',
-        'data' : "not exist" if user is None else "exist"
-    }
-    return JsonResponse(result)
+def check_username(request):
+    if request.method == 'GET':
+        username = request.GET.get('username', '').strip()
+        if not username:
+            return JsonResponse({'result': 'error', 'message': 'IDを入力してください。'})
+        users = User.objects.filter(username=username)
+        if users.exists():
+            return JsonResponse({'result': 'success', 'message': '使用できないIDです。','idck': False})
+        else:
+            return JsonResponse({'result': 'success', 'message': '使用可能なIDです.','idck': True})
 
 def regista(request):
     return render(request, 'regista.html')

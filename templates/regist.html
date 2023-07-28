@@ -17,18 +17,11 @@
               {% csrf_token %}
               <div class="row">
               <div class="col-md-10 mb-3">
-            <label  for="_d">ID</label>
+            <label  for="_d">ユーザー名</label>
                 <input name="username" type="text"  class="form-control" id="username" placeholder="ID" required>
-                <p id="idcheck1"></p>
+                <p id="result"></p>
               </div>
-
-              <div class="col-md-2 mb-3">
-                <label for="_d">ID CHECK</label>
-                <div>
-                  <input name="idcheck" class="btn btn-primary btn-block" type="button" id="idcheck" value="check">
-                </div></div>
-                <p id="result">&nbsp;</p>
-
+              
               <div class="mb-3">
                 <label for="pw">パスワード</label>
                 <input name="password1" type="password" class="form-control" id="password1" placeholder="password" required>
@@ -60,6 +53,6 @@
           </div>
         </div>
       </div>
+      <script src="{% static 'js/regist.js' %}"></script>
 </body>
-<script src="{% static 'js/regist.js' %}"></script>
 </html>

@@ -48,60 +48,38 @@ const sendit = () => {
     return true;
 }
 
-$(function(){
-    $('#username').change(function () {
-        $('#idcheck').show();
-        idck=false;
-    });
-
-    $('#idcheck').click(function(){
-        var username = $('#username').val()
-        if(username == ''){
-            alert('IDを入力してください。')
-            return;
+$(document).ready(function() {
+    $('#username').on('keyup', function() {
+      var username = $(this).val();
+      $.ajax({
+        type: 'GET',
+        url: "check_username/",
+        data: { 'username': username },
+        dataType: 'json',
+        success: function(data) {
+          if (data.result === 'success') {
+            idck = data.idck;
+            if (data.idck) {
+                idck = true;
+                $('#result').text(data.message).css('color', 'green');
+              } else {
+                idck = false;
+                $('#result').text(data.message).css('color', 'red');
+              }
+            $('#result').text(data.message);
+          } else {
+            idck=false;
+            console.log("Error:", data.message);
+            $('#result').text(data.message).css('color', 'red');
+          }
+        },
+        error: function(error) {
+          console.log("Error:", error);
         }
-
-        $.ajax({
-            url:'checkname?username='+username,
-            type:'get',
-            dataType:'json',
-            success:function(response){
-                if(response.result != 'success'){
-                    console.error(response.data)
-                    return;
-                }
-                if(response.data == 'exist'){
-                    alert("使用できないIDです。");
-                    $('#username').val('').focus();
-                    return;
-                }else{
-                    $('#idcheck').hide();
-                    $("#regist-submit").attr("name_check_result", "success");
-                    idck=true;
-                    return;
-                }
-            },
-            error : function(xhr, error){
-                alert("通信問題！");
-                console.error("error : " + error);
-            }
-        })
+      });
     });
-$('#regi-form').submit(function() {
-       console.log($("#regist-submit").attr("name_check_result"));
+  });
 
-       if($("#regist-submit").attr("name_check_result") == "fail") {
-          alert("ID checkボータンを押してください。");
-          $("#username").focus();
-          return false;
-       }
-    });
-
-    $("#username").on("propertychange change keyup paste input", function(){
-       $('#idcheck').show();
-       $("#regist-submit").attr("name_check_result", "fail");
-    });
-});
 
 let isusernameValid = false;
 let isPwdValid = false;
