@@ -1,8 +1,24 @@
 {% load static %}
 <head>
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>証書照合ページ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/lib_login/bootstrap.min.css' %}">
+    <script src="{% static 'js/lib_login/bootstrap.bundle.min.js' %}"></script>
 </head>
 <body>
-    LOG IN
+    <div class="container">
+        <form>
+          <!-- メールアドレス入力 -->
+          <div class="mb-3">
+            <label class="form-label" for="email1">メールアドレス</label>
+            <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="メールアドレスを入力">
+            <small id="emailHelp" class="form-text text-muted">あなたに関する個人情報を収集することはありません。</small>
+          </div>
+          <!-- パスワード入力 -->
+          <div class="mb-3">
+            <label class="form-label" for="password1">パスワード</label>
+            <input type="password" class="form-control" id="password1" placeholder="パスワードを入力"> </div>
+        </form>
+    </div>
 </body>
