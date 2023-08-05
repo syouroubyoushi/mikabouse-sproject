@@ -1,10 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from accounts.views import index
-from accounts.views import regist
-from accounts.views import regista
-from accounts.views import check_username
-from accounts.views import login
+from accounts.views import index,regist,regista,check_username,login
 
 app_name = 'accounts'
 
