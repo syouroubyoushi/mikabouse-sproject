@@ -43,5 +43,6 @@ def regista(request):
 def login(request):
     return render(request, 'login.html')
 
-def homepage(request):
-    return render(request,'homepage.html')
+#ホームページ
+def home(request):
+    return render(request,'home.html')
