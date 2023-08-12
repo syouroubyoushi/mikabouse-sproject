@@ -42,3 +42,6 @@ def regista(request):
 #ろぐいん
 def login(request):
     return render(request, 'login.html')
+
+def homepage(request):
+    return render(request,'homepage.html')

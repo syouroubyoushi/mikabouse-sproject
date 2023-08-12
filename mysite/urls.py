@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from accounts.views import index,regist,regista,check_username,login
+from accounts.views import index,regist,regista,check_username,login,homepage
 
 app_name = 'accounts'
 
@@ -11,4 +11,5 @@ urlpatterns = [
     path('regist/regista/', regista, name='regista'),
     path('login/', login, name='login'),
     path('regist/check_username/', check_username, name='check_username'),
+    path('homepage/',homepage,name='homepage'),
 ]
