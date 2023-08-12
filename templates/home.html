@@ -23,6 +23,7 @@
         Home 
         for you 
         <form method="post" action="{% url 'home' %}">
+            {% csrf_token %}
             <input required type="text" name="text">
             <button type="submit">Post</button>
         </form>
