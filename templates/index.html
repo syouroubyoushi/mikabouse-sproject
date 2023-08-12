@@ -1,10 +1,15 @@
 {% load static %}
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 <header>Top</header>
 <body class="lan">
-    check commit
+    <h1>三日坊主</h1>
+    {% comment %} registのリンクはPOST方式でお願いします。 {% endcomment %}
+    <a href="{% url 'regist' %}">ユーザー登録</a>
+    <a href="{% url 'login' %}">ログイン</a>
 </body>
 </html>
