@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.hashers import make_password
-
+from accounts.models import Text
 
 #トップページ
 def index(request):
@@ -45,4 +45,10 @@ def login(request):
 
 #ホームページ
 def home(request):
-    return render(request,'home.html')
+    toukou = Text.objects.all
+    if request.method =='POST':
+        text = request.POST.get('text',None)#
+        by = request.user#投稿誰がしたかの情報がｂｙに入る
+        m = Text(text= text,created_by = by)#ここでつくった変数をTextというデータベースモデルに保存
+        m.save()
+    return render(request,'home.html',{'Text':toukou})

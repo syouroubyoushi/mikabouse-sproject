@@ -26,6 +26,9 @@
             <input required type="text" name="text">
             <button type="submit">Post</button>
         </form>
+        {% for text in Text %}
+        <p>{{ text.text }}</p>
+        {% endfor %}
         following
         </div>
         <div class="box-item">
