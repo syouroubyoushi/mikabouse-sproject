@@ -22,6 +22,10 @@
         <div class="box-item">
         Home 
         for you 
+        <form method="post" action="{% url 'home' %}">
+            <input required type="text" name="text">
+            <button type="submit">Post</button>
+        </form>
         following
         </div>
         <div class="box-item">
