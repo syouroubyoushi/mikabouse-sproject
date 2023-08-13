@@ -1,45 +1,74 @@
 #flexbox{
-    display:flex;
-    background:#ddd;
-    width: 100%;
-    height:auto;
-    padding:10px;
+  display:flex;
+  background:white;
+  width: 100%;
+  height:auto;
+  padding:10px;
 }
 .box-item{
-    background:white;
-    text-align: center;
-    padding:15px 40px;
-    border:5px solid #ddd;
-  }
-  
-  /*ボタン*/
-  .btn-flat-border {
-    display: inline-block;
-    padding: 0.3em 1em;
-    text-decoration: none;
-    color: black;
-    border: solid 2px black;
-    border-radius: 3px;
-    transition: .4s;
-  }
-  
-  .btn-flat-border:hover {
-    background: rgb(129, 129, 129);
-    color: black;
-  }
+  flex: 1;
+  background:white;
+  text-align: center;
+  padding:15px 40px;
+  border:1px solid #ddd;
+  display: flex; /* 追加 */
+  flex-direction: column; /* 追加 */
+  justify-content: space-between; /* 追加 */
+}
 
-  .btn-flat-border1 {
-    display: inline-block;
-    padding: 0.3em 1em;
-    text-decoration: none;
-    color: white;
-    border: solid 2px white;
-    border-radius: 3px;
-    transition: .4s;
-    background-color: rgb(27, 156, 236);
-  }
-  
-  .btn-flat-border:hover {
-    background: rgb(23, 136, 206);
-    color: white;
-  }
+/* ボタン */
+.btn-flat-border,
+.btn-flat-border1 {
+  display: block;
+  margin: 5px auto;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  transition: .4s;
+  border-radius: 3px;
+  width: fit-content; /* 幅をテキストに合わせて調整 */
+  text-align: center; 
+  padding: 0.3em 1em; /* 調整 */
+}
+/*ボタン*/
+.btn-flat-border {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: black;
+  border: solid 2px white;
+  border-radius: 3px;
+  transition: .4s;
+  display: block; /* インラインからブロックに変更 */
+  margin: 5px auto; /* 中央寄せするために追加 */
+}
+
+.btn-flat-border:hover {
+  background: rgb(196, 196, 196);
+  color: black;
+  border: solid 2px rgb(196, 196, 196);
+}
+
+.btn-flat-border1 {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: white;
+  border: solid 2px rgb(27, 156, 236);
+  border-radius: 3px;
+  transition: .4s;
+  background-color: rgb(27, 156, 236);
+  display: block; /* インラインからブロックに変更 */
+  margin: 5px auto; /* 中央寄せするために追加 */
+}
+
+.btn-flat-border1:hover {
+  background: rgb(20, 116, 176);
+  color: white;
+  border: solid 2px rgb(20, 116, 176);
+}
+
+/* 左寄せボタン */
+.left-aligned {
+text-align: left;
+}
+

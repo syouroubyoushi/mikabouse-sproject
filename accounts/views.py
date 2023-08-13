@@ -47,8 +47,7 @@ def login(request):
 def home(request):
     toukou = Text.objects.all
     if request.method =='POST':
-        text = request.POST.get('text',None)#
-        by = request.user#投稿誰がしたかの情報がｂｙに入る
-        m = Text(text= text,created_by = by)#ここでつくった変数をTextというデータベースモデルに保存
+        text = request.POST.get('text',None)
+        m = Text(text= text)#ここでつくった変数をTextというデータベースモデルに保存
         m.save()
     return render(request,'home.html',{'Text':toukou})
