@@ -5,7 +5,7 @@ from accounts.views import index,regist,regista,check_username,login,home
 app_name = 'accounts'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),#admin/というURLでadmin.site.urlsにアクセスできる
     path('', index, name='index'),
     path('regist/', regist, name='regist'),
     path('regist/regista/', regista, name='regista'),
