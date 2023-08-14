@@ -5,34 +5,13 @@
   height:auto;
   padding:10px;
 }
-#flexbox1{
-  display:flex;
-      background:#ddd;
-      width: 100%;
-      height:auto;
-      padding:10px;
-}
-.leftright{
-  box-sizing: border-box;
-}
 .box-item{
   flex: 1;
   background:white;
   text-align: center;
   padding:15px 40px;
   border:1px solid #ddd;
-  display: flex; /* 追加 */
-  flex-direction: column; /* 追加 */
-  justify-content: space-between; /* 追加 */
-}
-
-.leftright{
-  flex: 1;
-  background:white;
-  text-align: center;
-  padding:15px 40px;
-  border:1px solid #ddd;
-  display: flex; /* 追加 */
+  display: flex; 
   flex-direction: column; /* 追加 */
   justify-content: space-between; /* 追加 */
 }
