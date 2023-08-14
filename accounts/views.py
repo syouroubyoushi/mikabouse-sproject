@@ -53,3 +53,4 @@ def home(request):
         m = Text(text= text)#ここでつくった変数をTextというデータベースモデルに保存
         m.save()
     return render(request,'home.html',{'Text':toukou})
+
