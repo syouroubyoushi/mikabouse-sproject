@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.hashers import make_password
 from accounts.models import Text
+from accounts.forms import LoginForm
 
 #トップページ
 def index(request):
