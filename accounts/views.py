@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect, JsonResponse
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from accounts.models import Text
 from accounts.forms import LoginForm
 
@@ -24,22 +25,49 @@ def regist(request):
             password=make_password(password1),
         )
         user.save()
-        return HttpResponseRedirect('regista')
-    
+    return HttpResponseRedirect('regista')
 #会員登録の時IDが重複かをLIVEで確認
 def check_username(request):
     if request.method == 'GET':
         username = request.GET.get('username', '').strip()
         if not username:
-            return JsonResponse({'result': 'error', 'message': 'IDを入力してください。'})
+            return JsonResponse({'result': 'error', 'message': 'IDを入力してください。','idck': False})
         users = User.objects.filter(username=username)
         if users.exists():
             return JsonResponse({'result': 'success', 'message': '使用できないIDです。','idck': False})
         else:
             return JsonResponse({'result': 'success', 'message': '使用可能なIDです.','idck': True})
-
+#会員登録後移動
 def regista(request):
     return render(request, 'regista.html')
+#アカウントの削除（未完成）
+def deleteacc(request):
+    user = request.user
+    # user.delete()
+    return redirect('delacc.html')
+#パスワードを変更（request.userのためログイン状態が必修）
+def change_password(request):
+    if request.method == "POST":
+        user = request.user
+        origin_password = request.POST.get('origin_password')
+        if check_password(origin_password, user.password):
+            new_password = request.POST.get('new_password')
+            confirm_password = request.POST.get('confirm_password')
+            if origin_password == new_password:
+                messages.error(request, '現在パスワード以外のパスワードを入力してください！')
+            elif new_password == confirm_password:
+                user.set_password(new_password)
+                user.save()
+                #login(request, user)
+                #return redirect('index')
+                messages.success(request, 'パスワードを変更しました。')
+            else:
+                messages.error(request, 'パスワードと再確認が異なります！')
+        else:
+            messages.error(request, '現在パスワードを確認してください。')
+        return render(request, 'changepw.html')
+    else:
+        return render(request, 'changepw.html')
 
 #ろぐいん
 def login(request):

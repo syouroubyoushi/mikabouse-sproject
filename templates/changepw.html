@@ -1,0 +1,35 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>パスワードの変更</title>
+        <link rel="stylesheet" href="{% static 'css/lib/bootstrap.min.css' %}">
+        <script src="{% static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <form method="POST" action="{% url 'change' %}">
+            {% csrf_token %}
+            現在パスワード：
+            <input name="origin_password" class="form-control" type="password">
+            <br><br>
+            変更するパスワード：
+            <input name="new_password" class="form-control" type="password">
+            <br><br>
+            パスワード再確認：
+            <input name="confirm_password" class="form-control" type="password">
+            <br><br>
+            {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+            <input class="btn btn-primary" type="submit" value="変更"> 
+            <input class="btn btn-secondary" type="button" onclick="location.href='../'" value="戻る">
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>アカウント削除ページ</title>
+    </head>
+    <body>
+        <form action="{% url 'delete' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" value="delte">
+        </form>
+    </body>
+</html>
