@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from accounts.models import CustomUser
 
@@ -9,4 +10,6 @@ class RegistrationForm(UserCreationForm):
 
 #ログインフォーム
 class LoginForm(AuthenticationForm):
-    pass
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.CharField()
