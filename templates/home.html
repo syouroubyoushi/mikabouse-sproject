@@ -6,7 +6,7 @@
 <header>Top</header>
 <body class="lan">
     <div id="flexbox">
-        <div class="box-item">
+        <div class="box-item1">
             <a href="#" class="btn-flat-border left-aligned">Quitter</a>
             <a href="#" class="btn-flat-border">Home</a>
             <a href="#" class="btn-flat-border">Explore</a>
@@ -21,12 +21,16 @@
             <a href="#" class="btn-flat-border1">Post</a> 
         </div>
     
-        <div class="box-item">
-        Home 
-        for you 
+        <div class="box-item2">
+        <h4>Home</h4> 
+        <div id="flexboxmain">
+            <div class="boxitemmain1">For you</div>
+            <div class="boxitemmain2">Following</div>
+        </div>
+        <a href="#" class="everyonereply">Everyone can reply</a>
         <form method="post" action="{% url 'home' %}">
             {% csrf_token %}
-            <input required type="text" name="text">
+            <input required type="text" name="text" id="textbox" placeholder="What is happening?!">
             <button type="submit">Post</button>
         </form>
         {% for text in Text %}
@@ -35,18 +39,18 @@
         {% endfor %}
         following
         </div>
-        <div class="box-item">
-        Search Quitter
+        <div class="box-item3">
+        <p>Search Quitter</p>
 
-        Get Verified
-        Subscribe to unlock new features.
-        Get Verified
+        <p>Get Verified</p>
+        <p>Subscribe to unlock new features.</p>
+        <p>Get Verified</p>
         
-        What's happening
-        Show more
+        <p>What's happening</p>
+        <p>Show more</p>
 
-        Who to follow
-        Show more
+        <p>Who to follow</p>
+        <p>Show more</p>
         </div>         
     </div>
 </body>
