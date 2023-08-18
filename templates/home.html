@@ -27,17 +27,17 @@
             <div class="boxitemmain1">For you</div>
             <div class="boxitemmain2">Following</div>
         </div>
-        <a href="#" class="everyonereply">Everyone can reply</a>
         <form method="post" action="{% url 'home' %}">
             {% csrf_token %}
             <input required type="text" name="text" id="textbox" placeholder="What is happening?!">
+            <a href="#" class="everyonereply">Everyone can reply</a>
             <button type="submit">Post</button>
         </form>
         {% for text in Text %}
         <p>{{ text.text }}</p>
         <p>Posted at {{text.created_at}}</p>
         {% endfor %}
-        following
+        
         </div>
         <div class="box-item3">
         <p>Search Quitter</p>
