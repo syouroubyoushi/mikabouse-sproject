@@ -30,7 +30,14 @@
         <form method="post" action="{% url 'home' %}">
             {% csrf_token %}
             <input required type="text" name="text" id="textbox" placeholder="What is happening?!">
-            <a href="#" class="everyonereply">Everyone can reply</a>
+            <div class="selectbox">
+                <select>
+                    <option>Everyone can reply</option>
+                    <option>People you follow</option>
+                    <option>Only people you mention</option>
+                </select>
+            </div>
+            <br>
             <button type="submit">Post</button>
         </form>
         {% for text in Text %}
