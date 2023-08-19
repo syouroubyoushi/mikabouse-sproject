@@ -47,6 +47,7 @@ const sendit = () => {
     username.focus();
     return false;
   }
+  alert("登録成功！");
 return true;
 }
 

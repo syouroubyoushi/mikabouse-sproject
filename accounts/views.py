@@ -25,7 +25,7 @@ def regist(request):
             password=make_password(password1),
         )
         user.save()
-    return HttpResponseRedirect('regista')
+    return redirect('login')
 #会員登録の時IDが重複かをLIVEで確認
 def check_username(request):
     if request.method == 'GET':
@@ -37,9 +37,6 @@ def check_username(request):
             return JsonResponse({'result': 'success', 'message': '使用できないIDです。','idck': False})
         else:
             return JsonResponse({'result': 'success', 'message': '使用可能なIDです.','idck': True})
-#会員登録後移動
-def regista(request):
-    return render(request, 'regista.html')
 #アカウントの削除（未完成）
 def deleteacc(request):
     user = request.user
