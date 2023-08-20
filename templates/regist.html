@@ -9,6 +9,12 @@
   <script src="{% static 'js/lib/jquery.js' %}"></script>
 </head>
 <body>
+  {% if user.is_authenticated%}
+  <script type="text/javascript">
+    alert('ログイン状態ではアクセスできません。');
+    window.location.href = '{%url "index" %}';
+  </script>
+  {%else%}
   <div class="container justify-content-center">
     <div class="input-form-backgroud d-flex">
       <div class="input-form col-md-6 mx-auto">
@@ -56,5 +62,6 @@
     </div>
   </div>
 <script src="{% static 'js/regist.js' %}"></script>
+{%endif%}
 </body>
 </html>

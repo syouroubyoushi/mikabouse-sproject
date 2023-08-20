@@ -8,6 +8,7 @@
         <script src="{% static 'js/lib/bootstrap.bundle.min.js' %}"></script>
     </head>
     <body>
+        {% if user.is_authenticated%}
         <div class="container">
             <form method="POST" action="{% url 'change' %}">
             {% csrf_token %}
@@ -31,5 +32,11 @@
             <input class="btn btn-secondary" type="button" onclick="location.href='../'" value="戻る">
             </form>
         </div>
+        {%else%}
+        <script type="text/javascript">
+            alert('異常なアクセスです！');
+            window.location.href = '{%url "login" %}';
+        </script>
+        {%endif%}
     </body>
 </html>
