@@ -39,12 +39,14 @@ def check_username(request):
             return JsonResponse({'result': 'success', 'message': '使用可能なIDです.','idck': True})
 #アカウントの削除
 def deleteacc(request):
-    if request.method == "POST":
-        user = request.user
+    user = request.user
+    alert_message = None
+    if user.is_superuser and user.username == "admin":
+        alert_message = 'adminアカウントは削除できません！'
+    elif request.method == "POST":
         user.delete()
         return redirect('index')
-    else:
-        return render(request, 'delacc.html')
+    return render(request, 'delacc.html', {'alert_message': alert_message})
 #パスワードを変更（request.userのためログイン状態が必修）
 def change_password(request):
     if request.method == "POST":

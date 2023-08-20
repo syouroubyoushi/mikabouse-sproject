@@ -9,37 +9,44 @@
         <title>アカウント削除ページ</title>
     </head>
     <body>
+        {% if alert_message %}
+        <div class="alert alert-warning" role="alert">
+            {{ alert_message }}
+        </div>
+        {% endif %}
         {% if user.is_authenticated%}
-        <button id="pushBtn" class="btn btn-danger">会員脱退</button>
-        <div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">確認</h5>
-                    </div>
-                    <div class="modal-body">本当にアカウントを削除しますか？</div>
-                    <div class="modal-footer">
-                        <form action="{% url 'delete' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="submit" class="btn btn-danger" value="アカウント削除">
-                        </form>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">いいえ</button>
+            {% if not user.is_superuser or user.username != "admin" %}
+            <button id="pushBtn" class="btn btn-danger">会員脱退</button>
+            {% endif %}
+            <div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">確認</h5>
+                        </div>
+                        <div class="modal-body">本当にアカウントを削除しますか？</div>
+                        <div class="modal-footer">
+                            <form action="{% url 'delete' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="アカウント削除">
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">いいえ</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <input class="btn btn-secondary" type="button" onclick="location.href='../'" value="戻る">
-        <script>
-            $('#pushBtn').click(function(e){
-            e.preventDefault();
-            $('#ConfirmModal').modal("show");
-        });
-    </script>
-    {%else%}
-    <script type="text/javascript">
-        alert('異常なアクセスです！');
-        window.location.href = '{%url "login" %}';
-    </script>
-    {%endif%}
+            <input class="btn btn-secondary" type="button" onclick="location.href='../'" value="戻る">
+            <script>
+                $('#pushBtn').click(function(e){
+                e.preventDefault();
+                $('#ConfirmModal').modal("show");
+                });
+            </script>
+        {%else%}
+        <script type="text/javascript">
+            alert('異常なアクセスです！');
+            window.location.href = '{%url "login" %}';
+        </script>
+        {%endif%}
     </body>
 </html>
