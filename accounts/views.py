@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
 from accounts.models import Text
@@ -40,8 +40,8 @@ def check_username(request):
 #アカウントの削除（未完成）
 def deleteacc(request):
     user = request.user
-    # user.delete()
-    return redirect('delacc.html')
+    user.delete()
+    return redirect('index')
 #パスワードを変更（request.userのためログイン状態が必修）
 def change_password(request):
     if request.method == "POST":
@@ -55,9 +55,9 @@ def change_password(request):
             elif new_password == confirm_password:
                 user.set_password(new_password)
                 user.save()
-                #login(request, user)
-                #return redirect('index')
+                update_session_auth_hash(request, user)
                 messages.success(request, 'パスワードを変更しました。')
+                return redirect('index')
             else:
                 messages.error(request, 'パスワードと再確認が異なります！')
         else:
