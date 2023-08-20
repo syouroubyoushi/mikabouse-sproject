@@ -37,7 +37,7 @@ def check_username(request):
             return JsonResponse({'result': 'success', 'message': '使用できないIDです。','idck': False})
         else:
             return JsonResponse({'result': 'success', 'message': '使用可能なIDです.','idck': True})
-#アカウントの削除（未完成）
+#アカウントの削除
 def deleteacc(request):
     user = request.user
     user.delete()
