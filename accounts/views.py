@@ -42,12 +42,12 @@ def deleteacc(request):
     user = request.user
     alert_message = None
     if user.is_superuser and user.username == "admin":
-        alert_message = 'adminアカウントは削除できません！'
+        alert_message = 'adminアカウントは削除できません!'
     elif request.method == "POST":
         user.delete()
         return redirect('index')
     return render(request, 'delacc.html', {'alert_message': alert_message})
-#パスワードを変更（request.userのためログイン状態が必修）
+#パスワードを変更
 def change_password(request):
     if request.method == "POST":
         user = request.user

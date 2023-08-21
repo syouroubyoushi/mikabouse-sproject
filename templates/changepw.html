@@ -3,14 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>パスワードの変更</title>
+        <title>パスワード変更</title>
         <link rel="stylesheet" href="{% static 'css/lib/bootstrap.min.css' %}">
         <script src="{% static 'js/lib/bootstrap.bundle.min.js' %}"></script>
     </head>
     <body>
-        {% if user.is_authenticated%}
+        {% if user.is_authenticated %}
         <div class="container">
             <form method="POST" action="{% url 'change' %}">
+            <br><br>
+            <h3>アカウント名：{{user}}</h3>
+            <br><br>
             {% csrf_token %}
             現在パスワード：
             <input name="origin_password" class="form-control" type="password">

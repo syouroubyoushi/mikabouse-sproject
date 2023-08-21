@@ -14,15 +14,29 @@
             {{ alert_message }}
         </div>
         {% endif %}
-        {% if user.is_authenticated%}
+        {% if user.is_authenticated %}
             {% if not user.is_superuser or user.username != "admin" %}
             <button id="pushBtn" class="btn btn-danger">会員脱退</button>
             {% endif %}
-            <div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">確認</h5>
+                            <h5 class="modal-title" id="exampleModalLabel1">警告</h5>
+                        </div>
+                        <div class="modal-body">アカウント削除を行う場合、<br>データが消滅されアカウントの復旧ができません。</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#exampleModalLabel2" data-bs-toggle="modal" data-bs-dismiss="modal">次へ</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">いいえ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalLabel2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2">確認</h5>
                         </div>
                         <div class="modal-body">本当にアカウントを削除しますか？</div>
                         <div class="modal-footer">
