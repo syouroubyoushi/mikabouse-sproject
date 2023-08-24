@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
 from accounts.models import Text
@@ -25,7 +25,7 @@ def regist(request):
             password=make_password(password1),
         )
         user.save()
-    return HttpResponseRedirect('regista')
+    return redirect('login')
 #会員登録の時IDが重複かをLIVEで確認
 def check_username(request):
     if request.method == 'GET':
@@ -37,15 +37,17 @@ def check_username(request):
             return JsonResponse({'result': 'success', 'message': '使用できないIDです。','idck': False})
         else:
             return JsonResponse({'result': 'success', 'message': '使用可能なIDです.','idck': True})
-#会員登録後移動
-def regista(request):
-    return render(request, 'regista.html')
-#アカウントの削除（未完成）
+#アカウントの削除
 def deleteacc(request):
     user = request.user
-    # user.delete()
-    return redirect('delacc.html')
-#パスワードを変更（request.userのためログイン状態が必修）
+    alert_message = None
+    if user.is_superuser and user.username == "admin":
+        alert_message = 'adminアカウントは削除できません!'
+    elif request.method == "POST":
+        user.delete()
+        return redirect('index')
+    return render(request, 'delacc.html', {'alert_message': alert_message})
+#パスワードを変更
 def change_password(request):
     if request.method == "POST":
         user = request.user
@@ -58,9 +60,9 @@ def change_password(request):
             elif new_password == confirm_password:
                 user.set_password(new_password)
                 user.save()
-                #login(request, user)
-                #return redirect('index')
+                update_session_auth_hash(request, user)
                 messages.success(request, 'パスワードを変更しました。')
+                return redirect('index')
             else:
                 messages.error(request, 'パスワードと再確認が異なります！')
         else:

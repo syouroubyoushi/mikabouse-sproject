@@ -9,45 +9,51 @@
   <script src="{% static 'js/lib/jquery.js' %}"></script>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="input-form-backgroud row">
+  {% if user.is_authenticated %}
+  <script type="text/javascript">
+    alert('ログイン状態ではアクセスできません。');
+    window.location.href = '{%url "index" %}';
+  </script>
+  {%else%}
+  <div class="container justify-content-center">
+    <div class="input-form-backgroud d-flex">
       <div class="input-form col-md-6 mx-auto">
-      <h4 class="mb-3">会員登録ページ</h4>
+      <h4 class="mb-3">会員登録</h4>
         <form action="{% url 'regist' %}" method="post" name="regiform" id="regist-Form" class="validation-form" novalidate onsubmit="return sendit()">
         {% csrf_token %}
           <div class="row">
             <div class="mb-3">
-              <label for="username">ユーザー名</label>
+              <label for="username">ユーザー名</label><span class="asterisk">*</span>
               <input name="username" type="text" class="form-control" id="username" placeholder="ID" required>
               <p id="result"></p>
             </div>
             
             <div class="mb-3">
-              <label for="pw">パスワード</label>
+              <label for="pw">パスワード</label><span class="asterisk">*</span>
               <input name="password1" type="password" class="form-control" id="password1" placeholder="password" required>
               <div class="invalid-feedback">
-                パスワードを入力してください。
+                パスワードは6文字以上で入力してください。
               </div>
             </div>
 
             <div class="mb-3">
-              <label for="pw">パスワード再確認</label>
+              <label for="pw">パスワード再確認</label><span class="asterisk">*</span>
               <input name="password2" type="password" class="form-control" id="password2" placeholder="password" required>
               <div class="invalid-feedback">
-                パスワード再確認を入力してください。
+                パスワード再確認を正しく入力してください。
               </div>
             </div>
 
             <div class="mb-3">
-              <label for="email">メールアドレス</label>
+              <label for="email">メールアドレス</label><span class="asterisk">*</span>
               <input name="email" type="email" class="form-control" id="email" placeholder="email@example.com" required>
               <div class="invalid-feedback">
-                メールアドレスを入力してください。
+                正しいメールアドレスを入力してください。
               </div>
             </div>
 
             <div class="mb-4">
-              <input class="btn btn-primary btn-lg btn-block" type="submit" id="regist-submit" name_check_result="fail" value="作成">
+              <input class="btn btn-primary btn-lg btn-block" type="submit" id="regist-submit" value="作成">
               <input class="btn btn-secondary btn-lg btn-block" type="button" onclick="location.href='../'" value="戻る">
             </div>
           </div>
@@ -56,5 +62,6 @@
     </div>
   </div>
 <script src="{% static 'js/regist.js' %}"></script>
+{%endif%}
 </body>
 </html>

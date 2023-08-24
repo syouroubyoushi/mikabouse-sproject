@@ -16,6 +16,12 @@ const sendit = () => {
     userpassword1.focus();
     return false;
   }
+  const expPwText = /^.{6,}$/;
+  if(!expPwText.test(userpassword1.value)) {
+    alert('パスワードは6文字以上で入力してください。');
+    userpassword1.focus();
+    return false;
+  }
   if(userpassword2.value == '') {
     alert('パスワード再確認を入力してください。');
     userpassword2.focus();
@@ -31,7 +37,7 @@ const sendit = () => {
     useremail.focus();
     return false;
   }
-  const expEmailText = /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z0-9\.\-]+$/;
+  const expEmailText = /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z\.\-]+$/;
   if(!expEmailText.test(useremail.value)) {
     alert('正しいメールアドレスではありません。');
     useremail.focus();
@@ -47,6 +53,7 @@ const sendit = () => {
     username.focus();
     return false;
   }
+  alert("登録成功！");
 return true;
 }
 
@@ -86,30 +93,40 @@ $(document).ready(function() {
 });
 
 let isPwdValid = false;
+let isPwdValid2 = false;
 let isEmailValid = false;
 
-function checkPwd(){
+function checkPwdlength(){
   const pwd = document.querySelector("#password1");
-  const pwd2 = document.querySelector("#password2");
-
   pwd.classList.remove("is-invalid");
   pwd.classList.remove("is-valid");
-  pwd2.classList.remove("is-invalid");
-  pwd2.classList.remove("is-valid");
-
-  if(pwd.value == pwd2.value){
+  
+  if(pwd.value.length > 5){
     pwd.classList.add("is-valid");
-    pwd2.classList.add("is-valid");
     isPwdValid = true;
   }else{
     pwd.classList.add("is-invalid");
-    pwd2.classList.add("is-invalid");
     isPwdValid = false;
   }
 }
 
+function checkPwd(){
+  const pwd = document.querySelector("#password1");
+  const pwd2 = document.querySelector("#password2");
+  pwd2.classList.remove("is-invalid");
+  pwd2.classList.remove("is-valid");
+
+  if(pwd.value == pwd2.value){
+    pwd2.classList.add("is-valid");
+    isPwdValid2 = true;
+  }else{
+    pwd2.classList.add("is-invalid");
+    isPwdValid2 = false;
+  }
+}
+
 document.querySelector("#password1").addEventListener("input",function(){
-  checkPwd();
+  checkPwdlength();
 });
 
 document.querySelector("#password2").addEventListener("input",function(){
@@ -120,7 +137,7 @@ document.querySelector("#email").addEventListener("input", function(){
   this.classList.remove("is-valid");
   this.classList.remove("is-invalid");
   const inputEmail=this.value;
-  const reg= /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z0-9\.\-]+$/;
+  const reg= /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z\.\-]+$/;
   if(!reg.test(inputEmail)){
     this.classList.add("is-invalid");
     isEmailValid = false;

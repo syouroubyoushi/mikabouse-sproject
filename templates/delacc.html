@@ -3,12 +3,64 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/lib/bootstrap.min.css' %}">
+        <script src="{% static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/lib/jquery.js' %}"></script>
         <title>アカウント削除ページ</title>
     </head>
     <body>
-        <form action="{% url 'delete' %}" method="POST">
-            {% csrf_token %}
-            <input type="text" value="delte">
-        </form>
+        {% if alert_message %}
+        <div class="alert alert-warning" role="alert">
+            {{ alert_message }}
+        </div>
+        {% endif %}
+        {% if user.is_authenticated %}
+            {% if not user.is_superuser or user.username != "admin" %}
+            <button id="pushBtn" class="btn btn-danger">会員脱退</button>
+            {% endif %}
+            <div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel1">警告</h5>
+                        </div>
+                        <div class="modal-body">アカウント削除を行う場合、<br>データが消滅されアカウントの復旧ができません。</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#exampleModalLabel2" data-bs-toggle="modal" data-bs-dismiss="modal">次へ</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">いいえ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalLabel2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2">確認</h5>
+                        </div>
+                        <div class="modal-body">本当にアカウントを削除しますか？</div>
+                        <div class="modal-footer">
+                            <form action="{% url 'delete' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="アカウント削除">
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">いいえ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input class="btn btn-secondary" type="button" onclick="location.href='../'" value="戻る">
+            <script>
+                $('#pushBtn').click(function(e){
+                e.preventDefault();
+                $('#ConfirmModal').modal("show");
+                });
+            </script>
+        {%else%}
+        <script type="text/javascript">
+            alert('異常なアクセスです！');
+            window.location.href = '{%url "login" %}';
+        </script>
+        {%endif%}
     </body>
 </html>
