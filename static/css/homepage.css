@@ -116,30 +116,37 @@ h4{
   text-align: left;
 }
 .selectbox {
-  width: 90%;
+  width: 50%;
   margin:1em auto;
 position:relative;
 }
 select{
-  -webkit-appearance:none;
-    appearance:none;
+ /* -webkit-appearance:none;
+    appearance:none;*/
   width:100%;
-  padding:1em 1em;
   box-sizing:border-box;
-  font-size:1em;
-  border:#ccc 1px solid;
+  border:rgb(211, 240, 255) 1px solid;
   border-radius:0;
   background:#fff;
+  background-color: rgb(211, 240, 255);
+  color: rgb(27, 156, 236);
+  height: 30px;
+  font-size: 8px;
+  font-weight: bold;
 }
 .selectbox::after{
   content:"";
   display:block;
   width:10px;
-  height:10px;
+  height:30px;
   position:absolute;
   right:5%;
   top:35%;
   border-bottom:white 2px solid;
   border-right:white 2px solid;
   transform:rotate(45deg)translateY(-30%);
+  background-color: white;
+  border: white 1px solid;
+  font-size: 8px;
+  font-weight: bold;
 }
