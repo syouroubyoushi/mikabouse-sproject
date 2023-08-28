@@ -150,3 +150,17 @@ select{
   font-size: 8px;
   font-weight: bold;
 }
+.delete{
+  width: 30%;
+  color: white;
+  background-color: rgb(27, 156, 236);
+}
+
+.postbox {
+  font-weight: bold;
+  color: #6091d3;/*文字色*/
+  background: #FFF;
+  border: solid 3px #6091d3;/*線*/
+  border-radius: 10px;/*角の丸み*/
+}
+

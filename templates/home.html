@@ -29,6 +29,7 @@
         <form method="post" action="{% url 'home' %}">
             {% csrf_token %}
             <input required type="text" name="text" id="textbox" placeholder="What is happening?!">
+            <!--見る人のセレクト-->
             <div class="selectbox">
                 <select>
                     <option>Everyone can reply</option>
@@ -37,11 +38,16 @@
                 </select>
             </div>
             <br>
+
             <button type="submit">Post</button>
         </form>
         {% for text in Text %}
-        <p>{{ text.text }}</p>
-        <p>Posted at {{text.created_at}}</p>
+        <div class="postbox">
+            <p>{{ text.text }}</p>
+            <p>Posted at {{text.created_at}}</p>
+            <button class="delete">Delete</button>
+            <button class="addcomment">Add comment</button>
+        </div>
         {% endfor %}
         
         </div>

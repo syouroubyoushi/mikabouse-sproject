@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from accounts.models import CustomUser
+from .models import Comment
 
 #会員登録フォーム
 class RegistrationForm(UserCreationForm):
@@ -13,3 +14,9 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
     email = forms.CharField()
+
+#comment機能
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["name","email","body"]
