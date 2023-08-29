@@ -84,3 +84,5 @@ def home(request):
         m.save()
     return render(request,'home.html',{'Text':toukou})
 
+def profile(request):
+    return render(request,'profile.html')
