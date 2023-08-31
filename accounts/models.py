@@ -8,6 +8,12 @@ class CustomUser(AbstractUser):
     user_permissions = models.ManyToManyField('auth.Permission', related_name='custom_user_permissions')
     email = models.EmailField(unique=True)
 
+#プロフィール
+class Profile(models.Model):
+    introduction_text=models.TextField()
+    birthday=models.TextField()
+    location=models.TextField()
+
 #投稿
 class Text(models.Model):
     text=models.TextField()
