@@ -10,9 +10,10 @@ class CustomUser(AbstractUser):
 
 #プロフィール
 class Profile(models.Model):
-    introduction_text=models.TextField()
-    birthday=models.TextField()
-    location=models.TextField()
+    user_id=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    introduction_text=models.TextField(null=True)
+    birthday=models.TextField(null=True)
+    location=models.TextField(null=True)
 
 #投稿
 class Text(models.Model):
