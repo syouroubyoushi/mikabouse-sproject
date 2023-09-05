@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
 
 #プロフィール
 class Profile(models.Model):
-    user_id=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True, blank=True)
     introduction_text=models.TextField(null=True)
     birthday=models.TextField(null=True)
     location=models.TextField(null=True)
