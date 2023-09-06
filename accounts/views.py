@@ -17,7 +17,7 @@ def regist(request):
         return render(request, 'regist.html')
     elif request.method == 'POST':
         username = request.POST.get('username', None)
-        email = request.POST.get('email', None) 
+        email = request.POST.get('email', None)
         password1 = request.POST.get('password1', None)
         user = User(
             username=username,
@@ -73,7 +73,10 @@ def change_password(request):
 
 #ろぐいん
 def login(request):
-    return render(request, 'login.html')
+    if request.method =="get":
+        return render(request, 'login.html')
+    if request.method =="post":
+        return
 
 #ホームページ
 def home(request):

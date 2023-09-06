@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="container">
-        <form>
+        <form action="{% url 'login' %}" method="post">{% csrf_token %}
+          <!-- ユーザー名入力 -->
           <div class="mb-3">
             <label class="form-label" for="username">アカウント名</label>
             <input type="text" class="form-control" id="username"  placeholder="アカウント名を入力">
@@ -23,6 +24,10 @@
           <div class="mb-3">
             <label class="form-label" for="password1">パスワード</label>
             <input type="password" class="form-control" id="password1" placeholder="パスワードを入力"> </div>
+          <div class="mb-2">
+              <label class="form-label" for="enter"></label>
+              <input type="submit" name="送信" class="form-control" id="enter" value="送信">
+          </div>
         </form>
     </div>
 </body>
