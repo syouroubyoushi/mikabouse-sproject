@@ -8,22 +8,23 @@
 </head>
 <body>
     <div class="container">
-        <form action="{% url 'login' %}" method="post">{% csrf_token %}
+        <form action="{% url 'login' %}" method="post" novalidate>{% csrf_token %}
           <!-- ユーザー名入力 -->
           <div class="mb-3">
             <label class="form-label" for="id_username">アカウント名</label>
-            <input type="text" name="username" class="form-control" id="id_username"  placeholder="アカウント名を入力">
+            <input type="text" name="username" class="form-control" id="id_username"  placeholder="アカウント名を入力" required>
           </div>
           <!-- メールアドレス入力 -->
           <div class="mb-3">
             <label class="form-label" for="id_email1">メールアドレス</label>
-            <input type="email" name="email" class="form-control" id="id_email1" aria-describedby="emailHelp" placeholder="メールアドレスを入力">
+            <input type="email" name="email" class="form-control" id="id_email1" aria-describedby="emailHelp" placeholder="メールアドレスを入力" required>
             <small id="emailHelp" class="form-text text-muted">あなたに関する個人情報を収集することはありません。</small>
           </div>
           <!-- パスワード入力 -->
           <div class="mb-3">
             <label class="form-label" for="id_password">パスワード</label>
-            <input type="password" name="password" class="form-control" id="id_password1" placeholder="パスワードを入力"> </div>
+            <input type="password" name="password" class="form-control" id="id_password1" placeholder="パスワードを入力" required>
+          </div>
           <div class="mb-2">
               <input type="submit" name="送信" class="form-control" id="enter" value="送信">
           </div>
