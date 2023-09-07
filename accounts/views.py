@@ -75,13 +75,18 @@ def change_password(request):
 def login(request):
     if request.method =="GET":
         return render(request, 'login')
-    if request.method =="POST":
+    elif request.method =="POST":
         login = LoginForm(request.POST)
         if login.is_valid():
             username = login.cleaned_data.get(username)
             password = login.cleaned_data.get(password)
             email = login.cleaned_data.get(email)
             return render(request,'profile')
+        else:
+            context = {
+                'login':login
+            }
+            return render(request,'login',context)
 
 
 #ホームページ
