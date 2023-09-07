@@ -73,9 +73,9 @@ def change_password(request):
 
 #ろぐいん
 def login(request):
-    if request.method =="GET":
+    if request.method =='GET':
         return render(request, 'login')
-    elif request.method =="POST":
+    elif request.method =='POST':
         login = LoginForm(request.POST)
         if login.is_valid():
             username = login.cleaned_data.get(username)
