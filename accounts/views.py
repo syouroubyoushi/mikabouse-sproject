@@ -84,7 +84,9 @@ def login(request):
             return render(request,'profile.html')
         else:
             context = {
-                'login':login
+                'username':username,
+                'password':password,
+                'email':email,
             }
             return render(request,'login.html',context)
 
