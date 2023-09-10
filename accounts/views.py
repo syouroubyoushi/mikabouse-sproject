@@ -83,12 +83,15 @@ def login(request):
             email = login.cleaned_data.get(email)
             return render(request,'profile.html')
         else:
+            login = LoginForm()
             context = {
                 'username':username,
                 'password':password,
                 'email':email,
             }
             return render(request,'login.html',context)
+    else:
+        return redirect('login.html')
 
 
 #ホームページ
