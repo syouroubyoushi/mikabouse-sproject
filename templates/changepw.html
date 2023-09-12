@@ -5,11 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>パスワード変更</title>
         <link rel="stylesheet" href="{% static 'css/lib/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/regist.css' %}">
         <script src="{% static 'js/lib/bootstrap.bundle.min.js' %}"></script>
     </head>
     <body>
         {% if user.is_authenticated %}
         <div class="container">
+            <div class="input-form col-md-6 mx-auto">
             <form method="POST" action="{% url 'change' %}">
             <br><br>
             <h3>アカウント名：{{user}}</h3>
@@ -35,6 +37,7 @@
             <input class="btn btn-secondary" type="button" onclick="location.href='../'" value="戻る">
             </form>
         </div>
+    </div>
         {%else%}
         <script type="text/javascript">
             alert('異常なアクセスです！');
