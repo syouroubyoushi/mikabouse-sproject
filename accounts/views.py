@@ -105,3 +105,7 @@ def home(request):
 
 def profile(request):
     return render(request,'profile.html')
+
+class SampleDeleteView(generic.DeleteView):
+    model = Sample #削除したいデータが保持されているmodelを指定
+    success_url = reverse_lazy('app:list_sample') #データ削除後に遷移したいページを指定
