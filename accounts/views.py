@@ -106,6 +106,9 @@ def home(request):
 def profile(request):
     return render(request,'profile.html')
 
-class SampleDeleteView(generic.DeleteView):
-    model = Sample #削除したいデータが保持されているmodelを指定
-    success_url = reverse_lazy('app:list_sample') #データ削除後に遷移したいページを指定
+def Delete(request, text_id):
+    model = get_object_or_404(Text, id=text_id) #Textというデータベースモデルの中のidがtext_idのものを抽出して、modelという変数に入れる
+    if request.method =='POST':
+        model.delete()
+        return redirect('home') #関数を実行
+     

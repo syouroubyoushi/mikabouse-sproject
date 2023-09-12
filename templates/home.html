@@ -26,7 +26,7 @@
             <div class="boxitemmain1">For you</div>
             <div class="boxitemmain2">Following</div>
         </div>
-        <form method="post" action="{% url 'home' %}">
+        <form method="post" action="{% url 'home' %}"><!--urls.pyに書いたnameの値を書くと、関数を実行してくれる-->
             {% csrf_token %}
             <input required type="text" name="text" id="textbox" placeholder="What is happening?!">
             <!--見る人のセレクト-->
@@ -43,10 +43,14 @@
         </form>
         {% for text in Text %}
         <div class="postbox">
-            <p>{{ text.text }}</p>
+            <p>{{ text.text }}</p><!--textというデータベースモデルの中のtext-->
             <p>Posted at {{text.created_at}}</p>
             <button class="addcomment">Add comment</button>
-            <button class="delete">Delete</button>
+            <form method="post" action="{% url 'Delete' text.id %}"> <!--postのときformを使わないといけない--><!--textというデータベースモデルの中のidをDeleteの関数にわたす-->
+                {% csrf_token %}<!--セキュリティを保つためにとりあえずいれとく-->
+
+                <button class="delete"　type="submit" >Delete</button>
+            </form>
         </div>
         {% endfor %}
         
