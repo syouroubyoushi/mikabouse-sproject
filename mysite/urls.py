@@ -13,6 +13,6 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('regist/check_username/', check_username, name='check_username'),
     path('home/',home,name='home'),
-    path('home/Delete/',Delete,name='Delete'),
+    path('home/<int:text_id>/Delete/',Delete,name='Delete'),
     path('profile/',profile,name='pfile'),
 ]
