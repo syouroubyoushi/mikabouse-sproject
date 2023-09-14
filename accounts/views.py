@@ -73,25 +73,21 @@ def change_password(request):
 
 #ろぐいん
 def login(request):
+    login = LoginForm(request.POST)
     if request.method =='GET':
-        return render(request, "login.html")
+        return render(request, "login.html",{'login':login})
     elif request.method =='POST':
         login = LoginForm(request.POST)
         if login.is_valid():
             username = login.cleaned_data.get(username)
             password = login.cleaned_data.get(password)
             email = login.cleaned_data.get(email)
-            return render(request,'profile.html')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return render(request,'profile.html')
         else:
-            login = LoginForm()
-            context = {
-                'username':username,
-                'password':password,
-                'email':email,
-            }
-            return render(request,'login.html',context)
-    else:
-        return redirect('login.html')
+            return redirect('login')
 
 
 #ホームページ
@@ -111,4 +107,4 @@ def Delete(request, text_id):
     if request.method =='POST':
         model.delete()
         return redirect('home') #関数を実行
-     
+
