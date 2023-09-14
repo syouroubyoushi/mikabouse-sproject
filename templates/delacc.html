@@ -4,16 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'css/lib/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/regist.css' %}">
         <script src="{% static 'js/lib/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'js/lib/jquery.js' %}"></script>
         <title>アカウント削除ページ</title>
     </head>
     <body>
+        <div class="container">
+            <div class="input-form col-md-6 mx-auto">
         {% if alert_message %}
         <div class="alert alert-warning" role="alert">
             {{ alert_message }}
         </div>
         {% endif %}
+        <h3>アカウント名：{{user}}</h3>
         {% if user.is_authenticated %}
             {% if not user.is_superuser or user.username != "admin" %}
             <button id="pushBtn" class="btn btn-danger">会員脱退</button>
@@ -50,6 +54,8 @@
                 </div>
             </div>
             <input class="btn btn-secondary" type="button" onclick="location.href='../'" value="戻る">
+        </div>
+    </div>
             <script>
                 $('#pushBtn').click(function(e){
                 e.preventDefault();
