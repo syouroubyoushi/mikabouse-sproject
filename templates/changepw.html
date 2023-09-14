@@ -17,13 +17,13 @@
             <h3>アカウント名：{{user}}</h3>
             <br><br>
             {% csrf_token %}
-            現在パスワード：
+            現在パスワード：<span class="asterisk">*</span>
             <input name="origin_password" class="form-control" type="password">
             <br><br>
-            変更するパスワード：
+            変更するパスワード：<span class="asterisk">*</span>
             <input name="new_password" class="form-control" type="password">
             <br><br>
-            パスワード再確認：
+            パスワード再確認：<span class="asterisk">*</span>
             <input name="confirm_password" class="form-control" type="password">
             <br><br>
             {% if messages %}
