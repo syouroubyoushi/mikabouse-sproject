@@ -17,11 +17,9 @@ def regist(request):
         return render(request, 'regist.html')
     elif request.method == 'POST':
         username = request.POST.get('username', None)
-        email = request.POST.get('email', None)
         password1 = request.POST.get('password1', None)
         user = User(
             username=username,
-            email=email,
             password=make_password(password1),
         )
         user.save()
@@ -72,22 +70,28 @@ def change_password(request):
         return render(request, 'changepw.html')
 
 #ろぐいん
-def login(request):
-    login = LoginForm(request.POST)
-    if request.method =='GET':
-        return render(request, "login.html",{'login':login})
-    elif request.method =='POST':
-        login = LoginForm(request.POST)
-        if login.is_valid():
-            username = login.cleaned_data.get(username)
-            password = login.cleaned_data.get(password)
-            email = login.cleaned_data.get(email)
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return render(request,'profile.html')
+from django.contrib.auth import authenticate, login as auth_login
+from django.shortcuts import render, redirect
+
+# ログイン
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        
+        # ユーザー認証を試みる
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            # 認証成功した場合、ログインセッションを開始
+            login(request, user)
+            return redirect('profile')  # ログイン後のリダイレクト先を設定してください
         else:
-            return redirect('login')
+            # 認証失敗時の処理を行う（エラーメッセージなど）
+            return render(request, 'login.html', {'error_message': 'Invalid username or password.'})
+    else:
+        # GETリクエストの場合はログインフォームを表示
+        return render(request, 'login.html')
 
 
 #ホームページ

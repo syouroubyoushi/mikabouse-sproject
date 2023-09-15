@@ -7,13 +7,12 @@ from .models import Comment
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'password1','password2','email']
+        fields = ['username', 'password1','password2']
 
 #ログインフォーム
 class LoginForm(AuthenticationForm):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
-    email = forms.CharField()
 
 #comment機能
 class CommentForm(forms.ModelForm):

@@ -1,17 +1,10 @@
-{% load static %}
-<head>
-    <title>証書照合ページ</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/lib_login/bootstrap.min.css' %}">
-    <script src="{% static 'js/lib_login/bootstrap.bundle.min.js' %}"></script>
-</head>
 <body>
-    <div class="container">
-        <form action="{% url 'login' %}" method="post" novalidate>{% csrf_token %}
-          {{ login.as_p }}
-          <input type="submit" name="送信" class="form-control" id="enter" value="送信">
+    <div>
+        <form action="{% url 'user_login' %}" method="post">
+            {% csrf_token %}
+            <label>username</label><input name="username" type="text">
+            <label>password</label><input name="password" type="text">
+            <button>送信</button>
         </form>
     </div>
 </body>
-</html>
