@@ -18,7 +18,7 @@ class Profile(models.Model):
 class Text(models.Model):
     text=models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    #created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True, blank=True)
     reply_to = models.IntegerField(null=True)
 
 # DM

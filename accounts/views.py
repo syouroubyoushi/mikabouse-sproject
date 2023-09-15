@@ -95,7 +95,8 @@ def home(request):
     toukou = Text.objects.all
     if request.method =='POST':
         text = request.POST.get('text',None)
-        m = Text(text= text)#ここでつくった変数をTextというデータベースモデルに保存
+        created_by = request.user
+        m = Text(text= text,created_by=created_by)#ここでつくった変数をTextというデータベースモデルに保存
         m.save()
     return render(request,'home.html',{'Text':toukou})
 
