@@ -69,10 +69,6 @@ def change_password(request):
     else:
         return render(request, 'changepw.html')
 
-#ろぐいん
-from django.contrib.auth import authenticate, login as auth_login
-from django.shortcuts import render, redirect
-
 # ログイン
 def user_login(request):
     if request.method == 'POST':
