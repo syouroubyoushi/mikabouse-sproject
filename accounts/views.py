@@ -101,7 +101,8 @@ def home(request):
     return render(request,'home.html',{'Text':toukou})
 
 def profile(request):
-    return render(request,'profile.html')
+    username = request.user.username
+    return render(request,'profile.html',{'username':username})
 
 def Delete(request, text_id):
     model = get_object_or_404(Text, id=text_id) #Textというデータベースモデルの中のidがtext_idのものを抽出して、modelという変数に入れる
