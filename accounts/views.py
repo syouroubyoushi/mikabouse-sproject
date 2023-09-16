@@ -1,15 +1,16 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate, update_session_auth_hash
+from django.contrib.auth import login, authenticate, update_session_auth_hash,logout
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
-from accounts.models import Text
+from accounts.models import Text,Profile
 from accounts.forms import LoginForm
 
 #トップページ
 def index(request):
-    return render(request, 'index.html')
+    username=request.user
+    return render(request, 'index.html',{'username':username})
 
 #会員登録
 def regist(request):
@@ -18,12 +19,10 @@ def regist(request):
     elif request.method == 'POST':
         username = request.POST.get('username', None)
         password1 = request.POST.get('password1', None)
-        user = User(
-            username=username,
-            password=make_password(password1),
-        )
-        user.save()
-    return redirect('login')
+        user = User.objects.create_user(username=username, password=password1)
+        profile = Profile(user=user)
+        profile.save()
+    return redirect('user_login')
 #会員登録の時IDが重複かをLIVEで確認
 def check_username(request):
     if request.method == 'GET':
@@ -89,6 +88,10 @@ def user_login(request):
         # GETリクエストの場合はログインフォームを表示
         return render(request, 'login.html')
 
+#ログアウト
+def user_logout(request):
+    logout(request)
+    return redirect('index')
 
 #ホームページ
 def home(request):
