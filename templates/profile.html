@@ -2,7 +2,9 @@
 <head>
     <title>Document</title>
     <link rel="stylesheet" href="{% static './css/homepage.css' %}">
+    <link rel="stylesheet" href="{% static './css/profile.css' %}"
 </head>
+
 <body class="lan">
     <div id="flexbox">
         <div class="box-item1">
@@ -23,10 +25,10 @@
         <div class="box-item2">
             <a href="{% url 'logout' %}">ログアウト</a>
             <h4>profile</h4> 
-            <button>プロフィール編集</button>
+            <button id="open">プロフィール編集</button>
             <p>ユーザー：{{ username }}</p>
-            <p>location:birthday:</p>
-            <p></p>
+            <p>location:{{ user_profile.location }}</p><p>birthday:{{ user_profile.birthday }}</p>
+            <p>{{ user_profile.introduction_text }}</p>
         </div>
 
         <div class="box-item3">
@@ -44,3 +46,29 @@
         </div>         
     </div>
 </body>
+
+<div id="dialog">
+    <h2>Edit Your Profile</h2>
+    <form method="post" href="{% url 'profile' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+    <button id="cancel">cansel</button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var openButton = document.getElementById("open");
+        var dialog = document.getElementById("dialog");
+        var cancelButton = document.getElementById("cancel");
+    
+        openButton.addEventListener("click", function() {
+            dialog.style.display = "block";
+        });
+    
+        cancelButton.addEventListener("click", function() {
+            dialog.style.display = "none";
+        });
+    });
+</script>

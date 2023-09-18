@@ -1,0 +1,9 @@
+#dialog{
+    display:none;
+    position:fixed;
+    z-index:99;
+    background-color:white;
+    border:solid rgb(88, 88, 88);
+    left:5%; top:5%;
+    overflow: scroll;
+}

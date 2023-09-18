@@ -5,7 +5,7 @@ from django.contrib.auth import login, authenticate, update_session_auth_hash,lo
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
 from accounts.models import Text,Profile
-from accounts.forms import LoginForm
+from accounts.forms import ProfileForm
 
 #トップページ
 def index(request):
@@ -105,7 +105,26 @@ def home(request):
 
 def profile(request):
     username = request.user.username
-    return render(request,'profile.html',{'username':username})
+    form = ProfileForm(request.POST, instance=request.user.profile)
+    user_profile = Profile.objects.get(user=request.user)
+    profile_instance = request.user.profile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile_instance)
+        if form.is_valid():
+            birth_month = form.cleaned_data.get('birth_month')
+            birth_day = form.cleaned_data.get('birth_day')
+            birth_year = form.cleaned_data.get('birth_year')
+            intoroduction = form.cleaned_data.get('introduction_text')
+            location = form.cleaned_data.get('location')
+            birthday = f"{birth_month}/{birth_day}/{birth_year}"
+            profile = form.save(commit=False)
+            profile.birthday = birthday
+            profile.introduction_text = intoroduction
+            profile.location = location
+            profile.user = request.user
+            profile.save()
+            return redirect('profile')
+    return render(request,'profile.html',{'username':username,'form': form,'user_profile':user_profile})
 
 def Delete(request, text_id):
     model = get_object_or_404(Text, id=text_id) #Textというデータベースモデルの中のidがtext_idのものを抽出して、modelという変数に入れる

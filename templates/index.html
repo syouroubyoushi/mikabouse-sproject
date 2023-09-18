@@ -12,6 +12,7 @@
     <a href="{% url 'user_login' %}">ログイン</a>
     {% if user.is_authenticated %}
         <a href="{% url 'logout' %}">ログアウト</a>
+        <a href="{% url 'home' %}">ホームへ</a>
         <p>ユーザー名：{{ username }}</p>
     {% endif %}
 </body>

@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser,User
 from django.db import models
 from django.conf import settings
 
@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
 
 #プロフィール
 class Profile(models.Model):
-    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True, blank=True)
+    user=models.OneToOneField(User, on_delete=models.CASCADE,null=True)
     introduction_text=models.TextField(null=True)
     birthday=models.TextField(null=True)
     location=models.TextField(null=True)
