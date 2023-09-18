@@ -46,11 +46,13 @@
             <p>{{ text.created_by }}:{{text.created_at}}</p>
             <p>{{ text.text }}</p><!--textというデータベースモデルの中のtext-->
             <button class="addcomment">Add comment</button>
+            {% if text.created_by == request.user %}<!--条件（テキスト書いた人がログインしてる人やったら）をhtmlにかけるよ-->
             <form method="post" action="{% url 'Delete' text.id %}"> <!--postのときformを使わないといけない--><!--textというデータベースモデルの中のidをDeleteの関数にわたす-->
                 {% csrf_token %}<!--セキュリティを保つためにとりあえずいれとく-->
 
                 <button class="delete" type="submit" >Delete</button>
             </form>
+            {% endif %}
         </div>
         {% endfor %}
         
