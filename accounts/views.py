@@ -107,9 +107,7 @@ def profile(request):
     username = request.user.username
     form = ProfileForm(request.POST, instance=request.user.profile)
     user_profile = Profile.objects.get(user=request.user)
-    profile_instance = request.user.profile
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile_instance)
         if form.is_valid():
             birth_month = form.cleaned_data.get('birth_month')
             birth_day = form.cleaned_data.get('birth_day')

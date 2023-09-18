@@ -20,6 +20,8 @@ class Text(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True, blank=True)
     reply_to = models.IntegerField(null=True)
+    total_replys = models.IntegerField(default=0)
+    total_like=models.IntegerField(default=0)
 
 # DM
 class DM(models.Model):
