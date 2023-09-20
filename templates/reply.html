@@ -1,0 +1,6 @@
+<form method="post" action="{% url 'reply' t.id %}">
+    {% csrf_token %}
+    <input name="text" requered>
+</form>
+{{t.text}}<!--返信された側の投稿を表示-->
+{{relpy.text}}<!--返信した側の投稿を表示-->

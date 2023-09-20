@@ -130,3 +130,14 @@ def Delete(request, text_id):
         model.delete()
         return redirect('home') #関数を実行
 
+def reply(request, reply_id):#reply_idは返信された投稿のId
+    t = get_object_or_404(Text,id=reply_id)#ｔは返信された投稿
+    reply_=Text.objects.filter(reply_to=reply_id)#replyは返信した投稿
+    if request.method == 'POST':#データベースに情報渡したいときはPOST #GETはページ移動のとき　#postかgetはhtml見たらわかる。getは記載なし
+        text=request.POST.get('text',None) #nameがついてる部分の情報をgetしてtextに代入
+        created_by=request.user #データベースからログインしてるユーザーの情報がcreated_byに入る
+        reply_to=reply_id #どの投稿に返信したかがわかるようにIDをいれておく
+        m=Text(text=text,created_by=created_by,reply_to=reply_to)
+        m.save()
+        return redirect('reply')
+    return render(request,'reply',{'t':t,'reply':reply_})

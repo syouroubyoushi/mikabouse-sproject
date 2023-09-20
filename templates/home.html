@@ -45,7 +45,7 @@
         <div class="postbox">
             <p>{{ text.created_by }}:{{text.created_at}}</p>
             <p>{{ text.text }}</p><!--textというデータベースモデルの中のtext-->
-            <button class="addcomment">Add comment</button>
+            <a class="addcomment" href="{% url 'reply' text.id %}">Add comment</a>
             {% if text.created_by == request.user %}<!--条件（テキスト書いた人がログインしてる人やったら）をhtmlにかけるよ-->
             <form method="post" action="{% url 'Delete' text.id %}"> <!--postのときformを使わないといけない--><!--textというデータベースモデルの中のidをDeleteの関数にわたす-->
                 {% csrf_token %}<!--セキュリティを保つためにとりあえずいれとく-->
