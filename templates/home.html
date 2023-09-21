@@ -42,6 +42,7 @@
             <button type="submit">Post</button>
         </form>
         {% for text in Text %}
+        {% if text.reply_to == None %}
         <div class="postbox">
             <p>{{ text.created_by }}:{{text.created_at}}</p>
             <p>{{ text.text }}</p><!--textというデータベースモデルの中のtext-->
@@ -54,6 +55,7 @@
             </form>
             {% endif %}
         </div>
+        {% endif %}
         {% endfor %}
         
         </div>

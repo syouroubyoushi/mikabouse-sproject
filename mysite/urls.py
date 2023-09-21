@@ -16,5 +16,5 @@ urlpatterns = [
     path('home/',home,name='home'),
     path('home/<int:text_id>/Delete/',Delete,name='Delete'),
     path('profile/',profile,name='profile'),
-    path('reply/<int:reply_id>',reply,name="reply"),
+    path('reply/<int:text_id>',reply,name="reply"),
 ]

@@ -1,6 +1,68 @@
-<form method="post" action="{% url 'reply' t.id %}">
-    {% csrf_token %}
-    <input name="text" requered>
-</form>
-{{t.text}}<!--返信された側の投稿を表示-->
-{{relpy.text}}<!--返信した側の投稿を表示-->
+{% load static %}
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static './css/homepage.css' %}">
+</head>
+<body class="lan">
+    <div id="flexbox">
+        <div class="box-item1">
+            <a href="#" class="btn-flat-border left-aligned">Quitter</a>
+            <a href="{% url 'home' %}" class="btn-flat-border">Home</a>
+            <a href="#" class="btn-flat-border">Explore</a>
+            <a href="#" class="btn-flat-border">Notifications</a>
+            <a href="#" class="btn-flat-border">Messages</a>
+            <a href="#" class="btn-flat-border">Lists</a>
+            <a href="#" class="btn-flat-border">Bookmarks</a>
+            <a href="#" class="btn-flat-border">Communities</a>
+            <a href="#" class="btn-flat-border">Verified</a>
+            <a href="{% url 'profile' %}" class="btn-flat-border">Profile</a>
+            <a href="#" class="btn-flat-border">More</a>
+            <a href="#" class="btn-flat-border1">Post</a> 
+        </div>
+
+        <div class="box-item2">
+            <div class="postbox">
+                <p>{{ text.created_by }}:{{text.created_at}}</p>
+                <p>{{ text.text }}</p>
+            </div>
+
+            <!-- 返信フォーム -->
+            <form method="post">
+                {% csrf_token %}
+                <label>reply to : {{text.created_by}}</label>
+                <textarea id="text" name="text" rows="4" cols="50" placeholder="返信を入力"></textarea>
+                <br>
+                <input type="submit" value="返信する">
+            </form>
+            <div>
+                {% for reply in reply_ %}
+                <p>{{reply.created_by}}:{{reply.created_at}}</p>
+                <p>{{ reply.text }}</p>
+                {% if reply.created_by == request.user %}
+                    <form method="post" action="{% url 'Delete' reply.id %}"> 
+                        {% csrf_token %}
+                        <button class="delete" type="submit" >Delete</button>
+                    </form>
+                    {% endif %}
+                {% empty %}
+                <p>まだ返信はありません。</p>
+                {% endfor %}
+                </div>
+        </div>
+
+    <div class="box-item3">
+        <p>Search Quitter</p>
+
+        <p>Get Verified</p>
+        <p>Subscribe to unlock new features.</p>
+        <p>Get Verified</p>
+        
+        <p>What's happening</p>
+        <p>Show more</p>
+
+        <p>Who to follow</p>
+        <p>Show more</p>
+        </div>         
+    </div>
+</body>
+</html>
