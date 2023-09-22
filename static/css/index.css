@@ -1,6 +1,60 @@
-.lan{
-    color:rgb(59, 154, 249);
+
+h1{
+    text-align: center;
+    color: white;
+    margin: 100px;
+}
+.center{
+    margin: 10px auto;
+  width:100px;
+  background: rgb(59, 154, 249);
+  color: white;
+  text-align: center;
+}
+.center a{
+    color: white;
+    text-decoration: none; /* 下線を削除 */
 }
 body{
-    background-color: white;
-}
+    background:#1f56fa;
+    -webkit-animation:colour 10s linear infinite;
+    -moz-animation:colour 10s linear infinite;
+    
+  }
+  @-webkit-keyframes colour{
+    0%{
+      background:#1f56fa
+    }
+  
+    40%{
+      background:#3278f2
+    }
+  
+    80%{
+      background:#73c1f9
+    }
+  
+    100%{
+      background:#5186d1
+    }
+  
+  }
+  
+  @-moz-keyframes colour{
+    0%{
+      background:#1f56fa
+    }
+  
+    40%{
+      background:#3278f2
+    }
+  
+    80%{
+      background:#73c1f9
+    }
+  
+    100%{
+      background:#5186d1
+    }
+  
+  }

@@ -22,7 +22,7 @@
 
         <div class="box-item2">
             <div class="postbox">
-                <p>{{ text.created_by }}:{{text.created_at}}</p>
+                <p>{{ text.created_by }}:{{text.created_at}}</p><!--phthonで書いたやつが{{}}に入ってる。django特有の書き方-->
                 <p>{{ text.text }}</p>
             </div>
 
@@ -35,7 +35,7 @@
                 <input type="submit" value="返信する">
             </form>
             <div>
-                {% for reply in reply_ %}
+                {% for reply in reply_ %} <!--forは繰り返しで、reply_をreplyでかきます-->
                 <p>{{reply.created_by}}:{{reply.created_at}}</p>
                 <p>{{ reply.text }}</p>
                 {% if reply.created_by == request.user %}

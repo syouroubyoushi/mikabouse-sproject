@@ -140,4 +140,4 @@ def reply(request, text_id):#text_idは返信された投稿のId
         m = Text(text=text, created_by=created_by, reply_to=reply_to)
         m.save()
         return redirect('reply', text_id=text_id)
-    return render(request, 'reply.html', {'text': toukou, 'reply_': reply_})
+    return render(request, 'reply.html', {'text': toukou, 'reply_': reply_}) #{}でかかれてるのはhtmlで値を使えるとこ。'text''reply'が使える
