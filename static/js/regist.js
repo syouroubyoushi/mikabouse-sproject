@@ -4,7 +4,6 @@ const sendit = () => {
   const username = document.regiform.username;
   const userpassword1 = document.regiform.password1;
   const userpassword2 = document.regiform.password2;
-  const useremail = document.regiform.email;
 
   if(username.value == '') {
     alert('IDを入力してください。');
@@ -30,17 +29,6 @@ const sendit = () => {
   if(userpassword1.value != userpassword2.value) {
     alert('パスワードと再確認が異なります！');
     userpassword2.focus();
-    return false;
-  }
-  if(useremail.value == '') {
-    alert('メールアドレスを入力してください。');
-    useremail.focus();
-    return false;
-  }
-  const expEmailText = /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z\.\-]+$/;
-  if(!expEmailText.test(useremail.value)) {
-    alert('正しいメールアドレスではありません。');
-    useremail.focus();
     return false;
   }
   if(idck==0){
@@ -94,7 +82,6 @@ $(document).ready(function() {
 
 let isPwdValid = false;
 let isPwdValid2 = false;
-let isEmailValid = false;
 
 function checkPwdlength(){
   const pwd = document.querySelector("#password1");
@@ -131,18 +118,4 @@ document.querySelector("#password1").addEventListener("input",function(){
 
 document.querySelector("#password2").addEventListener("input",function(){
   checkPwd();
-});
-
-document.querySelector("#email").addEventListener("input", function(){
-  this.classList.remove("is-valid");
-  this.classList.remove("is-invalid");
-  const inputEmail=this.value;
-  const reg= /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z\.\-]+$/;
-  if(!reg.test(inputEmail)){
-    this.classList.add("is-invalid");
-    isEmailValid = false;
-  }else{
-    this.classList.add("is-valid");
-    isEmailValid = true;
-  }
 });
