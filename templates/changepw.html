@@ -41,7 +41,7 @@
         {%else%}
         <script type="text/javascript">
             alert('異常なアクセスです！');
-            window.location.href = '{%url "login" %}';
+            window.location.href = '{% url "user_login" %}';
         </script>
         {%endif%}
     </body>
