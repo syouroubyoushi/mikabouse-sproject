@@ -124,6 +124,25 @@ def profile(request):
             return redirect('profile')
     return render(request,'profile.html',{'username':username,'form': form,'user_profile':user_profile})
 
+def searchprofile(request):
+    query = request.GET.get('query', '')
+
+    if query:
+        users = User.objects.filter(username__icontains=query)
+    else:
+        users = []
+
+    return render(request, 'searchprofile.html', {'users': users})
+
+def profileview(request, username):
+    user = get_object_or_404(User, username=username)
+    try:
+        user_profile = Profile.objects.get(user=user)
+    except Profile.DoesNotExist:
+        user_profile = None
+    form = ProfileForm(request.POST or None, instance=user_profile)
+    return render(request, 'profileview.html', {'username': username, 'form': form, 'user_profile': user_profile, 'user': user})
+
 def Delete(request, text_id):
     model = get_object_or_404(Text, id=text_id) #Textというデータベースモデルの中のidがtext_idのものを抽出して、modelという変数に入れる
     if request.method =='POST':

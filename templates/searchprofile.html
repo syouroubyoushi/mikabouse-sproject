@@ -1,0 +1,21 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/lib/bootstrap.min.css' %}">
+    <script src="{% static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/lib/jquery.js' %}"></script>
+</head>
+<div class="container">
+    <div class="input-form col-md-6 mx-auto">
+        <h1>検索結果</h1>
+    <ul>
+        {% for user in users %}
+            <li><a href="{% url 'profileview' user.username %}">{{ user.username }}</a></li>
+        {% empty %}
+            <p>検索結果がありません。</p>
+        {% endfor %}
+        <input class="btn btn-secondary btn-block" type="button" onclick="location.href='{% url 'home' %}'" value="戻る">
+    </ul>
+    </div>
+</div>

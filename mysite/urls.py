@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from accounts.views import index,regist,deleteacc,change_password,check_username,user_login,home,profile,Delete,reply,user_logout
+from accounts.views import index,regist,deleteacc,change_password,check_username,user_login,home,profile,searchprofile,profileview,Delete,reply,user_logout
 
 app_name = 'accounts'
 
@@ -16,5 +16,7 @@ urlpatterns = [
     path('home/',home,name='home'),
     path('home/<int:text_id>/Delete/',Delete,name='Delete'),
     path('profile/',profile,name='profile'),
+    path('searchprofile/',searchprofile,name='searchprofile'),
+    path('profile/<str:username>/', profileview, name='profileview'),
     path('reply/<int:text_id>',reply,name="reply"),
 ]

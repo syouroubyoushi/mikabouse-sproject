@@ -22,6 +22,10 @@
     
         <div class="box-item2">
         <h4>Home</h4> 
+        <form method="GET" action="{% url 'searchprofile' %}">
+            <input type="text" name="query" placeholder="ユーザーを探す">
+            <button type="submit">検索</button>
+        </form>
         <div id="flexboxmain">
             <div class="boxitemmain1">For you</div>
             <div class="boxitemmain2">Following</div>

@@ -25,7 +25,10 @@
         <div class="box-item2">
             <a href="{% url 'user_logout' %}">ログアウト</a>
             <h4>profile</h4> 
-            <button id="open">プロフィール編集</button>
+            <form method="GET" action="{% url 'searchprofile' %}">
+                <input type="text" name="query" placeholder="ユーザーを探す">
+                <button type="submit">検索</button>
+            </form>
             <p>ユーザー：{{ username }}</p>
             <p>location:{{ user_profile.location }}</p><p>birthday:{{ user_profile.birthday }}</p>
             <p>{{ user_profile.introduction_text }}</p>
@@ -46,29 +49,3 @@
         </div>         
     </div>
 </body>
-
-<div id="dialog">
-    <h2>Edit Your Profile</h2>
-    <form method="post" href="{% url 'profile' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Changes</button>
-    </form>
-    <button id="cancel">cansel</button>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var openButton = document.getElementById("open");
-        var dialog = document.getElementById("dialog");
-        var cancelButton = document.getElementById("cancel");
-    
-        openButton.addEventListener("click", function() {
-            dialog.style.display = "block";
-        });
-    
-        cancelButton.addEventListener("click", function() {
-            dialog.style.display = "none";
-        });
-    });
-</script>
